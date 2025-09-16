@@ -78,16 +78,30 @@ def update_table(selected_table):
         current_table = repeat_table
         title = "ЮНИТ-ЭКОНОМИКА ДЛЯ СЕГМЕНТА ПОКУПАТЕЛЕЙ С >1 ПОКУПКАМИ"
     
+    # Стили для таблицы
+    table_style = {
+        'width': '100%',
+        'borderCollapse': 'collapse',
+        'margin': '20px auto'
+    }
+    cell_style = {
+        'border': '1px solid black',
+        'padding': '6px',
+        'textAlign': 'center'
+    }
+    
     table = html.Table([
-        html.Thead(html.Tr([html.Th(col) for col in current_table.columns])),
+        html.Thead(
+            html.Tr([html.Th(col, style=cell_style) for col in current_table.columns])
+        ),
         html.Tbody([
-            html.Tr([html.Td(current_table.iloc[i][col]) for col in current_table.columns])
+            html.Tr([html.Td(current_table.iloc[i][col], style=cell_style) for col in current_table.columns])
             for i in range(len(current_table))
         ])
-    ], style={'width': '100%', 'borderCollapse': 'collapse', 'margin': '20px'})
+    ], style=table_style)
     
     return html.Div([
-        html.H3(title, style={'textAlign': 'center'}),
+        html.H3(title, style={'textAlign': 'center', 'marginTop': '20px'}),
         table
     ])
 
